@@ -6,9 +6,6 @@ import Map from "./components/Map";
 
 
 export default function Home() {
-  
-
-
 
   return (
     <div>
@@ -23,3 +20,4 @@ export default function Home() {
     
   );
 }
+
