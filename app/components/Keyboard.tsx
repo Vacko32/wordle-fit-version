@@ -1,22 +1,64 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
 interface MapProps {
   solution: string;
   onGuess: (word: string) => void;
+  disabled?: boolean;
+  correct?: boolean;
 }
 
-const Keyboard: React.FC<MapProps> = ({ solution, onGuess }) => {
+const Keyboard: React.FC<MapProps> = ({ solution, onGuess, disabled, correct }) => {
   const [guessValue, setGuessValue] = useState("");
+  
+  
+
 
   const handleGuess = () => {
-    onGuess(guessValue);
+    if ( guessValue.length === solution.length) {
+    onGuess(guessValue.toUpperCase());
     setGuessValue("");
+      }
+    else {
+      alert("Slovo musí mít stejný počet písmen jako řešení")
+    }
   };
+
+
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setGuessValue(event.target.value);
+    const inputValue = event.target.value.toUpperCase();
+  
+  if (inputValue.length <= solution.length) {
+    setGuessValue(inputValue);
   };
+};
 
+
+
+
+  if (!disabled) {
+      
+    
+    if (correct) {
+      return (
+        <div className="flex flex-col items-center justify-center mt-32 text-2xl">
+          Dobrá práce kocourku! Tady máš odměnu! 
+          <div className="mt-8 pb-20">
+            <img src="/images/ima.gif" alt="Animated GIF" />
+          </div>
+        </div>
+      );
+    }
+    else {
+    return (
+      <div className="flex items-center justify-center mt-32 text-2xl">
+        
+        Jéjé, to je ale pech! Přístě to určitě vyjde!
+
+      </div>
+    );
+  }
+}
+  if (disabled) {
   return (
     <div className="flex justify-center items-center mt-20">
       <input
@@ -28,9 +70,11 @@ const Keyboard: React.FC<MapProps> = ({ solution, onGuess }) => {
         style={{ borderRadius: "5px" }}
       ></input>
 
-      <button onClick={handleGuess} className="ml-10">Potvrdit slovo</button>
+      <button onClick={handleGuess} className="ml-10">
+        Potvrdit slovo
+      </button>
     </div>
   );
 };
-
+};
 export default Keyboard;
