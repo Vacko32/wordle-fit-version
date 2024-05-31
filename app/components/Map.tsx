@@ -5,30 +5,32 @@ import { useState } from "react";
 interface MapProps {
   solution: string;
   guessValue: string[];
+  canLoad: boolean;
 }
 
-const Square: React.FC<{ letter?: string 
-                         colour?: number}> = ({ letter, colour}) => {
-
-    if (colour === 1) {
-      return (
-        <div className="w-16 h-16 border-2 border-white ml-2 mt-4 bg-red-500 text-2xl">
-          <div className="w-full h-full flex justify-center items-center">
-            {letter}
-          </div>
-        </div>
-      );
-    }
-    if (colour === 2) {
+const Square: React.FC<{ letter?: string; colour?: number }> = ({
+  letter,
+  colour,
+}) => {
+  if (colour === 1) {
     return (
-        <div className="w-16 h-16 border-2 border-white ml-2 mt-4 bg-green-500 text-2xl">
-          <div className="w-full h-full flex justify-center items-center">
-            {letter}
-          </div>
+      <div className="w-16 h-16 border-2 border-white ml-2 mt-4 bg-red-500 text-2xl">
+        <div className="w-full h-full flex justify-center items-center">
+          {letter}
         </div>
-      );
-    };
-    if (colour === 3) {
+      </div>
+    );
+  }
+  if (colour === 2) {
+    return (
+      <div className="w-16 h-16 border-2 border-white ml-2 mt-4 bg-green-500 text-2xl">
+        <div className="w-full h-full flex justify-center items-center">
+          {letter}
+        </div>
+      </div>
+    );
+  }
+  if (colour === 3) {
     return (
       <div className="w-16 h-16 border-2 border-white ml-2 mt-4 bg-yellow-500 text-2xl">
         <div className="w-full h-full flex justify-center items-center">
@@ -36,7 +38,7 @@ const Square: React.FC<{ letter?: string
         </div>
       </div>
     );
-  };
+  }
   return (
     <div className="w-16 h-16 border-2 border-white ml-2 mt-4 bg-black text-xl">
       <div className="w-full h-full flex justify-center items-center">
@@ -46,16 +48,11 @@ const Square: React.FC<{ letter?: string
   );
 };
 
-
-const Map: React.FC<MapProps> = ({ solution, guessValue }) => {
+const Map: React.FC<MapProps> = ({ solution, guessValue, canLoad }) => {
   const lines: JSX.Element[] = [];
 
   const generateLine = (word: string) => {
     const squares: JSX.Element[] = [];
-
-
-    
-
 
     for (let i = 0; i < solution.length; i++) {
       word.toUpperCase();
@@ -68,7 +65,7 @@ const Map: React.FC<MapProps> = ({ solution, guessValue }) => {
       if (word === "") {
         color = 0;
       }
-      if (solution.includes(word[i])){
+      if (solution.includes(word[i])) {
         color = 3;
       }
       if (word[i] === solution[i]) {
@@ -90,13 +87,21 @@ const Map: React.FC<MapProps> = ({ solution, guessValue }) => {
     }
   };
   generateMap();
-
-  return <div className="flex flex-col items-center justify-center">
+  if (!canLoad) {
+    return (
+      <div className="flex flex-col items-center justify-center">
+        <div className="text-2xl mt-14">Načítám slovo...</div>
+      </div>
+    );
+  }
+  return (
+    <div className="flex flex-col items-center justify-center">
       {lines}
       <div className="text-2xl mt-14">
-          Dnešní slovo má {solution.length} písmen
+        Dnešní slovo má {solution.length} písmen
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default Map;

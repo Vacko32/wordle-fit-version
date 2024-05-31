@@ -17,5 +17,4 @@ datasource db {
 model GuessWord {
   id        String  @id @default(auto()) @map("_id") @db.ObjectId
   word      String
-  date     DateTime?
 }
