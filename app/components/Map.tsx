@@ -77,6 +77,21 @@ const Map: React.FC<MapProps> = ({ solution, guessValue, canLoad }) => {
     return squares;
   };
 
+  const [pismeno, setpismeno] = useState("");
+  useEffect(() => {
+    if (solution.length === 1) {
+      setpismeno("písmeno");
+    } else if (
+      solution.length === 2 ||
+      solution.length === 3 ||
+      solution.length === 4
+    ) {
+      setpismeno("písmena");
+    } else {
+      setpismeno("písmen");
+    }
+  }, [solution]);
+
   const generateMap = () => {
     for (let i = 0; i < 6; i++) {
       lines.push(
@@ -98,7 +113,7 @@ const Map: React.FC<MapProps> = ({ solution, guessValue, canLoad }) => {
     <div className="flex flex-col items-center justify-center">
       {lines}
       <div className="text-2xl mt-14">
-        Dnešní slovo má {solution.length} písmen
+        Dnešní slovo má {solution.length} {pismeno}
       </div>
     </div>
   );
