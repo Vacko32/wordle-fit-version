@@ -35,7 +35,10 @@ export default function Home() {
   }, []);
   async function fetchData() {
     try {
-      const todaysDate = new Date().toISOString().split("T")[0];
+      const newDate = new Date();
+      newDate.setHours(newDate.getHours() + 2);
+      const todaysDate = newDate.toISOString().split("T")[0];
+      console.log(todaysDate);
       const { data, error } = await supabase
         .from("slovicka")
         .select("title")
