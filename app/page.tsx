@@ -22,12 +22,11 @@ export default function Home() {
     setGuessValue(newGuessValue);
     if (guessValue[i].toUpperCase() === solution.toUpperCase()) {
       setIsCorrect(true);
-      alert("You guessed the correct word");
+
       setDisabled(false);
     }
     if (i === 5) {
       setDisabled(false);
-      alert("Uz jsou vsechny pokusy spotrebovany");
     }
   };
 
@@ -57,7 +56,7 @@ export default function Home() {
         FitWordle
       </div>
       <div>
-        <Map solution={solution} guessValue={guessValue} canLoad={wordLoaded}/>
+        <Map solution={solution} guessValue={guessValue} canLoad={wordLoaded} />
 
         <Keyboard
           solution={solution}
