@@ -23,6 +23,12 @@ const Keyboard: React.FC<MapProps> = ({
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleGuess();
+    }
+  };
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value.toUpperCase();
 
@@ -44,7 +50,8 @@ const Keyboard: React.FC<MapProps> = ({
     } else {
       return (
         <div className="flex items-center justify-center mt-32 text-2xl">
-          Jéjé, to je ale pech! Přístě to určitě vyjde! Dnešní slovo bylo:{solution}
+          Jéjé, to je ale pech! Přístě to určitě vyjde! Dnešní slovo bylo:
+          {solution}
         </div>
       );
     }
@@ -56,6 +63,7 @@ const Keyboard: React.FC<MapProps> = ({
           type="text"
           value={guessValue}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           placeholder="Zadejte slovo"
           className="mt-4 mb-2 p-2 bg-black text-white border border-white"
           style={{ borderRadius: "5px" }}
