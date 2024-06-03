@@ -44,7 +44,7 @@ const Keyboard: React.FC<MapProps> = ({
     } else {
       return (
         <div className="flex items-center justify-center mt-32 text-2xl">
-          Jéjé, to je ale pech! Přístě to určitě vyjde!
+          Jéjé, to je ale pech! Přístě to určitě vyjde! Dnešní slovo bylo:{solution}
         </div>
       );
     }

@@ -12,8 +12,6 @@ export default function Home() {
   const [disabled, setDisabled] = useState(true);
   const [isCorrect, setIsCorrect] = useState(false);
   const [wordLoaded, setWordLoaded] = useState(false);
-  const mongoDataApi =
-    "iOlw27EtYKOnse9PsgVskxpBPROvjNBu4tKbn9wHUpfFfqCbLxYqulWzTVqcODID";
   const newGuessValue: string[] = guessValue;
 
   const handleGuess = (word: string) => {
@@ -55,8 +53,11 @@ export default function Home() {
 
   return (
     <div>
-      <div className="flex justify-center items-center mt-40 text-5xl">
-        FitWordle
+      <div className="flex flex-col items-center justify-center">
+        <div className="flex justify-center items-center mt-40 text-5xl">
+          FitWordle
+        </div>
+        <div> (diakritika enabled)</div>
       </div>
       <div>
         <Map solution={solution} guessValue={guessValue} canLoad={wordLoaded} />
